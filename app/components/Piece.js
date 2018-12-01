@@ -1,6 +1,6 @@
 // @flow
-
 import React from 'react';
+import Draggable from 'react-draggable';
 import styles from './Piece.css';
 
 type Props = {
@@ -9,11 +9,10 @@ type Props = {
   y: number
 };
 
-export default function Piece({ type, x = 0, y = 0 }: Props) {
+export default function Piece({ type, x, y }: Props) {
   return (
-    <div
-      className={styles[type]}
-      style={{ transform: `translate(${x}px, ${y}px)` }}
-    />
+    <Draggable>
+      <div className={styles[type]} style={{ top: y, left: x }} />
+    </Draggable>
   );
 }
