@@ -1,7 +1,7 @@
 .container {
   background-color: #7a774f;
-  width: var(--container);
-  height: var(--container);
+  width: var(--boardContainerWidth);
+  height: var(--boardContainerWidth);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,15 +10,15 @@
 .board {
   position: absolute;
   font-size: 0;
-  width: var(--board);
-  height: var(--board);
+  width: var(--boardWidth);
+  height: var(--boardWidth);
   border: 1px solid black;
 }
 
 .labels {
   position: absolute;
-  height: var(--container);
-  width: var(--container);
+  height: var(--boardContainerWidth);
+  width: var(--boardContainerWidth);
 }
 
 .files,
@@ -34,27 +34,27 @@
 }
 
 .files {
-  padding-left: var(--frame);
-  line-height: var(--frame);
+  padding-left: var(--frameWidth);
+  line-height: var(--frameWidth);
   display: flex;
   position: absolute;
   bottom: 0;
 }
 
 .file {
-  width: var(--square);
-  height: var(--frame);
+  width: var(--squareWidth);
+  height: var(--frameWidth);
 }
 
 .ranks {
-  padding-top: var(--frame);
-  line-height: var(--square);
-  width: var(--frame);
+  padding-top: var(--frameWidth);
+  line-height: var(--squareWidth);
+  width: var(--frameWidth);
   position: absolute;
   left: 0;
 }
 
 .rank {
-  width: var(--frame);
-  height: var(--square);
+  width: var(--frameWidth);
+  height: var(--squareWidth);
 }

@@ -9,6 +9,6 @@
 .dark,
 .light {
   display: inline-block;
-  width: var(--square);
-  height: var(--square);
+  width: var(--squareWidth);
+  height: var(--squareWidth);
 }

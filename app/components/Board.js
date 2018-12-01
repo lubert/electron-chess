@@ -2,29 +2,18 @@
 import React, { Component } from 'react';
 import Square from './Square';
 import styles from './Board.css';
+import { squareWidth, frameWidth } from '../constants';
+import { cssVars } from '../utils';
 
 const files = 'abcdefgh'.split('');
 const ranks = '87654321'.split('');
 
-// Inject CSS variables
-const square = 42;
-const frame = 16;
-const board = square * 8;
-const container = frame * 2 + board;
-
-const style = (
-  <style>
-    {' '}
-    {`
-:root {
-  --square: ${square}px;
-  --frame: ${frame}px;
-  --board: ${board}px;
-  --container: ${container}px;
-}
-`}
-  </style>
-);
+const vars = {
+  squareWidth,
+  frameWidth,
+  boardWidth: squareWidth * 8,
+  boardContainerWidth: frameWidth * 2 + squareWidth * 8
+};
 
 type Props = {};
 
@@ -41,7 +30,7 @@ export default class Board extends Component<Props> {
     }
     return (
       <div className={styles.container}>
-        {style}
+        {cssVars(vars)}
         <div className={styles.board}>{squares}</div>
         <div className={styles.labels}>
           <div className={styles.files}>
