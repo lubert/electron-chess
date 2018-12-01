@@ -52,7 +52,7 @@ export default class Board extends Component<Props> {
         const type = this.state.board[i][j];
         const key = `${files[j]}${8 - i}`;
         squares.push(
-          <Square key={key} coord={key} dark={i % 2 ? !!(j % 2) : !(j % 2)}>
+          <Square key={key} coord={key} dark={(i + j) % 2 === 1}>
             <Piece type={type} x={squareWidth * j} y={squareWidth * i} />
           </Square>
         );
