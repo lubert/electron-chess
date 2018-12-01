@@ -1,0 +1,14 @@
+.dark {
+  background-color: #ada981;
+}
+
+.light {
+  background-color: #d8d5b5;
+}
+
+.dark,
+.light {
+  display: inline-block;
+  width: var(--square);
+  height: var(--square);
+}

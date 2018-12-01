@@ -58,18 +58,3 @@
   width: var(--frame);
   height: var(--square);
 }
-
-.darkSquare {
-  background-color: #ada981;
-}
-
-.lightSquare {
-  background-color: #d8d5b5;
-}
-
-.darkSquare,
-.lightSquare {
-  display: inline-block;
-  width: var(--square);
-  height: var(--square);
-}

@@ -1,16 +1,7 @@
 // @flow
 import React, { Component } from 'react';
+import Square from './Square';
 import styles from './Board.css';
-
-type SquareProps = {
-  dark: boolean,
-  coord: string
-};
-
-function Square({ dark, coord }: SquareProps) {
-  const style = dark ? styles.darkSquare : styles.lightSquare;
-  return <div className={style} coord={coord} />;
-}
 
 const files = 'abcdefgh'.split('');
 const ranks = '87654321'.split('');
@@ -36,6 +27,7 @@ const style = (
 );
 
 type Props = {};
+
 export default class Board extends Component<Props> {
   render() {
     const squares = [];
