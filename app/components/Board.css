@@ -1,0 +1,30 @@
+.container {
+  background-color: #7a774f;
+  width: 352px;
+  height: 352px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.board {
+  font-size: 0;
+  width: 320px;
+  height: 320px;
+  border: 1px solid black;
+}
+
+.darkSquare {
+  background-color: #ada981;
+}
+
+.lightSquare {
+  background-color: #d8d5b5;
+}
+
+.darkSquare,
+.lightSquare {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+}
