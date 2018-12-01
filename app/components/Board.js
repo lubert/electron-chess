@@ -26,28 +26,69 @@ for (let i = 7; i >= 0; i -= 1) {
   }
 }
 
+const R = 'R';
+const N = 'N';
+const B = 'B';
+const Q = 'Q';
+const K = 'K';
+const P = 'P';
+const r = 'r';
+const n = 'n';
+const b = 'b';
+const q = 'q';
+const k = 'k';
+const p = 'p';
+
 type Props = {};
 
 export default class Board extends Component<Props> {
+  state = {
+    board: [
+      [r, n, b, q, k, b, n, r],
+      [p, p, p, p, p, p, p, p],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [P, P, P, P, P, P, P, P],
+      [R, N, B, Q, K, B, N, R]
+    ]
+  };
+
+  get pieces() {
+    const pieces = [];
+    for (let i = 0; i < 8; i += 1) {
+      for (let j = 0; j < 8; j += 1) {
+        pieces.push(
+          <Piece
+            type={this.state.board[i][j]}
+            x={squareWidth * j}
+            y={squareWidth * i}
+          />
+        );
+      }
+    }
+    return pieces;
+  }
+
   render() {
-    const pieces = [<Piece type="K" />];
     return (
       <div className={styles.container}>
         {cssVars(vars)}
         <div className={styles.board}>{squares}</div>
-        <div className={styles.pieces}>{pieces}</div>
+        <div className={styles.pieces}>{this.pieces}</div>
         <div className={styles.labels}>
           <div className={styles.files}>
-            {files.map(f => (
-              <div key={f} className={styles.file}>
-                {f}
+            {files.map(file => (
+              <div key={file} className={styles.file}>
+                {file}
               </div>
             ))}
           </div>
           <div className={styles.ranks}>
-            {ranks.map(r => (
-              <div key={r} className={styles.rank}>
-                {r}
+            {ranks.map(rank => (
+              <div key={rank} className={styles.rank}>
+                {rank}
               </div>
             ))}
           </div>
