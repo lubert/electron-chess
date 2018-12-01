@@ -16,16 +16,6 @@ const vars = {
   boardContainerWidth: frameWidth * 2 + squareWidth * 8
 };
 
-const squares = [];
-for (let i = 7; i >= 0; i -= 1) {
-  for (let j = 0; j < 8; j += 1) {
-    const key = `${files[j]}${i + 1}`;
-    squares.push(
-      <Square key={key} coord={key} dark={i % 2 ? !!(j % 2) : !(j % 2)} />
-    );
-  }
-}
-
 const R = 'R';
 const N = 'N';
 const B = 'B';
@@ -55,26 +45,26 @@ export default class Board extends Component<Props> {
     ]
   };
 
-  get pieces() {
-    const pieces = [];
+  get squares() {
+    const squares = [];
     for (let i = 0; i < 8; i += 1) {
       for (let j = 0; j < 8; j += 1) {
         const type = this.state.board[i][j];
-        if (type) {
-          pieces.push(
+        const key = `${files[j]}${8 - i}`;
+        squares.push(
+          <Square key={key} coord={key} dark={i % 2 ? !!(j % 2) : !(j % 2)}>
             <Piece type={type} x={squareWidth * j} y={squareWidth * i} />
-          );
-        }
+          </Square>
+        );
       }
     }
-    return pieces;
+    return squares;
   }
 
   render() {
     return (
       <div className={styles.container}>
         {cssVars(vars)}
-        <div className={styles.board}>{squares}</div>
         <div className={styles.labels}>
           <div className={styles.files}>
             {files.map(file => (
@@ -91,7 +81,7 @@ export default class Board extends Component<Props> {
             ))}
           </div>
         </div>
-        <div className={styles.pieces}>{this.pieces}</div>
+        <div className={styles.board}>{this.squares}</div>
       </div>
     );
   }
