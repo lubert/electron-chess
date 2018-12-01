@@ -15,22 +15,42 @@ function Square({ dark, coord }: SquareProps) {
 const files = 'abcdefgh'.split('');
 const ranks = '87654321'.split('');
 
-type Props = {};
+// Inject CSS variables
+const square = 42;
+const frame = 16;
+const board = square * 8;
+const container = frame * 2 + board;
 
+const style = (
+  <style>
+    {' '}
+    {`
+:root {
+  --square: ${square}px;
+  --frame: ${frame}px;
+  --board: ${board}px;
+  --container: ${container}px;
+}
+`}
+  </style>
+);
+
+type Props = {};
 export default class Board extends Component<Props> {
   render() {
-    const board = [];
+    const squares = [];
     for (let i = 7; i >= 0; i -= 1) {
       for (let j = 0; j < 8; j += 1) {
         const key = `${files[j]}${i + 1}`;
-        board.push(
+        squares.push(
           <Square key={key} coord={key} dark={i % 2 ? !!(j % 2) : !(j % 2)} />
         );
       }
     }
     return (
       <div className={styles.container}>
-        <div className={styles.board}>{board}</div>
+        {style}
+        <div className={styles.board}>{squares}</div>
         <div className={styles.labels}>
           <div className={styles.files}>
             {files.map(f => (
