@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import Piece from './Piece';
 import Square from './Square';
 import styles from './Board.css';
 import { squareWidth, frameWidth } from '../constants';
@@ -15,23 +16,26 @@ const vars = {
   boardContainerWidth: frameWidth * 2 + squareWidth * 8
 };
 
+const squares = [];
+for (let i = 7; i >= 0; i -= 1) {
+  for (let j = 0; j < 8; j += 1) {
+    const key = `${files[j]}${i + 1}`;
+    squares.push(
+      <Square key={key} coord={key} dark={i % 2 ? !!(j % 2) : !(j % 2)} />
+    );
+  }
+}
+
 type Props = {};
 
 export default class Board extends Component<Props> {
   render() {
-    const squares = [];
-    for (let i = 7; i >= 0; i -= 1) {
-      for (let j = 0; j < 8; j += 1) {
-        const key = `${files[j]}${i + 1}`;
-        squares.push(
-          <Square key={key} coord={key} dark={i % 2 ? !!(j % 2) : !(j % 2)} />
-        );
-      }
-    }
+    const pieces = [<Piece type="K" />];
     return (
       <div className={styles.container}>
         {cssVars(vars)}
         <div className={styles.board}>{squares}</div>
+        <div className={styles.pieces}>{pieces}</div>
         <div className={styles.labels}>
           <div className={styles.files}>
             {files.map(f => (

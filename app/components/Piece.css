@@ -1,0 +1,7 @@
+.K {
+  background-image: url('../img/2d/wk.svg');
+  background-repeat: no-repeat;
+  height: var(--squareWidth);
+  width: var(--squareWidth);
+  background-position: center;
+}

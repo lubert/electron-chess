@@ -58,3 +58,10 @@
   width: var(--frameWidth);
   height: var(--squareWidth);
 }
+
+.pieces {
+  position: absolute;
+  font-size: 0;
+  width: var(--boardWidth);
+  height: var(--boardWidth);
+}
