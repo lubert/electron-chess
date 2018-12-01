@@ -59,13 +59,12 @@ export default class Board extends Component<Props> {
     const pieces = [];
     for (let i = 0; i < 8; i += 1) {
       for (let j = 0; j < 8; j += 1) {
-        pieces.push(
-          <Piece
-            type={this.state.board[i][j]}
-            x={squareWidth * j}
-            y={squareWidth * i}
-          />
-        );
+        const type = this.state.board[i][j];
+        if (type) {
+          pieces.push(
+            <Piece type={type} x={squareWidth * j} y={squareWidth * i} />
+          );
+        }
       }
     }
     return pieces;
@@ -76,7 +75,6 @@ export default class Board extends Component<Props> {
       <div className={styles.container}>
         {cssVars(vars)}
         <div className={styles.board}>{squares}</div>
-        <div className={styles.pieces}>{this.pieces}</div>
         <div className={styles.labels}>
           <div className={styles.files}>
             {files.map(file => (
@@ -93,6 +91,7 @@ export default class Board extends Component<Props> {
             ))}
           </div>
         </div>
+        <div className={styles.pieces}>{this.pieces}</div>
       </div>
     );
   }
