@@ -1,17 +1,68 @@
+:root {
+  --square: 42px;
+  --frame: 16px;
+  --board: calc(var(--square) * 8);
+  --container: calc(var(--frame) * 2 + var(--board));
+}
+
 .container {
   background-color: #7a774f;
-  width: 352px;
-  height: 352px;
+  width: var(--container);
+  height: var(--container);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .board {
+  position: absolute;
   font-size: 0;
-  width: 320px;
-  height: 320px;
+  width: var(--board);
+  height: var(--board);
   border: 1px solid black;
+}
+
+.labels {
+  position: absolute;
+  height: var(--container);
+  width: var(--container);
+}
+
+.files,
+.ranks {
+  font-size: 10px;
+  color: white;
+}
+
+.file,
+.rank {
+  text-align: center;
+}
+
+.files {
+  padding-left: var(--frame);
+  line-height: var(--frame);
+  display: flex;
+  position: absolute;
+  bottom: 0;
+}
+
+.file {
+  width: var(--square);
+  height: var(--frame);
+}
+
+.ranks {
+  padding-top: var(--frame);
+  line-height: var(--square);
+  width: var(--frame);
+  position: absolute;
+  left: 0;
+}
+
+.rank {
+  width: var(--frame);
+  height: var(--square);
 }
 
 .darkSquare {
@@ -25,6 +76,6 @@
 .darkSquare,
 .lightSquare {
   display: inline-block;
-  width: 40px;
-  height: 40px;
+  width: var(--square);
+  height: var(--square);
 }
