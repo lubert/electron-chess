@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import Piece from './Piece';
+import MovablePiece from './MovablePiece';
 import Square from './Square';
 import styles from './Board.css';
 import { squareWidth, frameWidth } from '../constants';
@@ -53,7 +53,13 @@ export default class Board extends Component<Props> {
         const key = `${files[j]}${8 - i}`;
         squares.push(
           <Square key={key} coord={key} dark={(i + j) % 2 === 1}>
-            <Piece type={type} x={squareWidth * j} y={squareWidth * i} />
+            {type && (
+              <MovablePiece
+                type={type}
+                x={squareWidth * j}
+                y={squareWidth * i}
+              />
+            )}
           </Square>
         );
       }
