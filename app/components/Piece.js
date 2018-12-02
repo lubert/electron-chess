@@ -24,9 +24,6 @@ const imgMap = {
 export default function Piece({ type }: Props) {
   const img = imgMap[type];
   if (!img) return null;
-  return (
-    <div>
-      <img src={img} alt={type} />
-    </div>
-  );
+
+  return <img src={img} alt={type} />;
 }

@@ -2,4 +2,5 @@ img {
   display: block;
   height: var(--squareWidth);
   width: var(--squareWidth);
+  pointer-events: none;
 }
