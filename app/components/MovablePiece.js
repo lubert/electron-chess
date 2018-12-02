@@ -9,27 +9,46 @@ type Props = {
 
 export default class MovablePiece extends Component<Props> {
   state = {
-    x: 0,
-    y: 0
+    position: {
+      x: 0,
+      y: 0
+    },
+    offset: {
+      x: 0,
+      y: 0
+    }
   };
 
   onMouseDown = e => {
     const { x, y, width, height } = e.currentTarget.getBoundingClientRect();
-    const mid = { x: x + width / 2, y: y + height / 2 };
-    const mouse = { x: e.pageX, y: e.pageY };
-    this.setState({ x: mouse.x - mid.x, y: mouse.y - mid.y });
+    const midx = x + width / 2;
+    const midy = y + height / 2;
+    this.setState({ offset: { x: e.pageX - midx, y: e.pageY - midy } });
+  };
+
+  onStop = (e, { x, y }) => {
+    const { offset } = this.state;
+    this.setState({
+      offset: { x: 0, y: 0 },
+      position: { x: x + offset.x, y: y + offset.y }
+    });
   };
 
   render() {
     const { type } = this.props;
-    const { x, y } = this.state;
+    const { position, offset } = this.state;
+
+    const dragProps = {
+      position,
+      onStop: this.onStop
+    };
 
     return (
-      <Draggable>
+      <Draggable {...dragProps}>
         <div>
           <div
             onMouseDown={this.onMouseDown}
-            style={{ transform: `translate(${x}px, ${y}px)` }}
+            style={{ transform: `translate(${offset.x}px, ${offset.y}px)` }}
           >
             <Piece type={type} />
           </div>
