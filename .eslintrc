@@ -40,6 +40,7 @@
     "jsx-a11y/no-static-element-interactions": "off",
     "no-console": "off",
     "no-use-before-define": "off",
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "no-multi-assign": "off",
     "prefer-template": "off",
     "promise/param-names": "error",

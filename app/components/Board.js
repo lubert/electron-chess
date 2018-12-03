@@ -31,6 +31,12 @@ const p = 'p';
 
 type Props = {};
 
+function getCoord(i, j) {
+  const file = files[j];
+  const rank = 8 - i;
+  return `${file}${rank}`;
+}
+
 export default class Board extends Component<Props> {
   state = {
     board: [
@@ -42,22 +48,31 @@ export default class Board extends Component<Props> {
       [0, 0, 0, 0, 0, 0, 0, 0],
       [P, P, P, P, P, P, P, P],
       [R, N, B, Q, K, B, N, R]
-    ]
+    ],
+    dragging: false,
+    highlighted: {}
   };
 
   get squares() {
     const squares = [];
+    const { board, dragging, highlighted } = this.state;
     for (let i = 0; i < 8; i += 1) {
       for (let j = 0; j < 8; j += 1) {
-        const type = this.state.board[i][j];
-        const key = `${files[j]}${8 - i}`;
+        const type = board[i][j];
+        const key = getCoord(i, j);
         squares.push(
-          <Square key={key} coord={key} dark={(i + j) % 2 === 1}>
+          <Square
+            key={key}
+            coord={key}
+            dark={(i + j) % 2 === 1}
+            highlight={dragging && highlighted[key] ? 'valid' : null}
+          >
             {type && (
               <MovablePiece
                 type={type}
-                x={squareWidth * j}
-                y={squareWidth * i}
+                onMoveStart={() => this.onMoveStart(i, j)}
+                onMove={(x, y) => this.onMove(i, j, x, y)}
+                onMoveEnd={(x, y) => this.onMoveEnd(i, j, x, y)}
               />
             )}
           </Square>
@@ -66,6 +81,21 @@ export default class Board extends Component<Props> {
     }
     return squares;
   }
+
+  onMoveStart = (_i, _j) => {
+    this.setState({ dragging: true });
+  };
+
+  onMove = (i, j, x, y) => {
+    const di = Math.round(y / squareWidth);
+    const dj = Math.round(x / squareWidth);
+    const coord = getCoord(i + di, j + dj);
+    this.setState({ highlighted: { [coord]: true } });
+  };
+
+  onMoveEnd = (_i, _j, _x, _y) => {
+    this.setState({ dragging: false });
+  };
 
   render() {
     return (

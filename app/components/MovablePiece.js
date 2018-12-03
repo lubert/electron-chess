@@ -4,7 +4,10 @@ import Draggable from 'react-draggable';
 import Piece from './Piece';
 
 type Props = {
-  type: string
+  type: string,
+  onMoveStart: () => void,
+  onMove: (x: number, y: number) => void,
+  onMoveEnd: (x: number, y: number) => void
 };
 
 export default class MovablePiece extends Component<Props> {
@@ -26,12 +29,22 @@ export default class MovablePiece extends Component<Props> {
     this.setState({ offset: { x: e.pageX - midx, y: e.pageY - midy } });
   };
 
-  onStop = (e, { x, y }) => {
+  onDragStart = (_e, { _x, _y }) => {
+    this.props.onMoveStart();
+  };
+
+  onDrag = (_e, { x, y }) => {
+    const { offset } = this.state;
+    this.props.onMove(x + offset.x, y + offset.y);
+  };
+
+  onDragStop = (_e, { x, y }) => {
     const { offset } = this.state;
     this.setState({
       offset: { x: 0, y: 0 },
       position: { x: x + offset.x, y: y + offset.y }
     });
+    this.props.onMoveEnd(x + offset.x, y + offset.y);
   };
 
   render() {
@@ -40,7 +53,9 @@ export default class MovablePiece extends Component<Props> {
 
     const dragProps = {
       position,
-      onStop: this.onStop
+      onStart: this.onDragStart,
+      onDrag: this.onDrag,
+      onStop: this.onDragStop
     };
 
     return (

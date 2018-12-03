@@ -12,3 +12,7 @@
   width: var(--squareWidth);
   height: var(--squareWidth);
 }
+
+.valid {
+  background-color: blue;
+}
